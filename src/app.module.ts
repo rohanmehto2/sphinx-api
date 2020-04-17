@@ -7,6 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import * as ormconfig from './ormconfig';
 import { SecretsModule } from './api/secrets/secrets.module';
 import { MembersModule } from './api/member/members.module';
+import { AuthModule } from './auth/auth.module';
+import {LoginModule} from './api/login/login.module';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { MembersModule } from './api/member/members.module';
     SecretsModule,
     MembersModule,
     TypeOrmModule.forRoot(ormconfig),
+    AuthModule,
+    LoginModule
   ],
   controllers: [AppController],
   providers: [AppService],

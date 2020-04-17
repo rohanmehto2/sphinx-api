@@ -12,4 +12,4 @@ import { ConfigModule } from 'src/config/config.module';
   providers: [MemberService],
   exports: [MemberService]
 })
-export class MemberModule {}
+export class MemberModule { }

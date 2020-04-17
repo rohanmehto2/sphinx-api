@@ -1,12 +1,14 @@
-import { Controller, Post, Res, Body, HttpStatus, Logger, Patch, Param } from '@nestjs/common';
-import { AdminService } from './admin.service'
+import { Controller, Post, Res, Body, HttpStatus, Logger, Patch, Param, UseGuards } from '@nestjs/common';
+import { AdminService } from './admin.service';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+
 
 @Controller('admin')
 export class AdminController {
     constructor(
         private readonly adminService: AdminService
-    ) {}
-
+    ) { }
+    
     @Post('/member')
     async addMember(@Res() res, @Body() body) {
         try {
@@ -16,15 +18,16 @@ export class AdminController {
             return res.status(HttpStatus.OK).json({
                 message: 'Member created successfully',
                 member,
-              });
+            });
         } catch (err) {
             Logger.error(err);
             return res.status(HttpStatus.BAD_REQUEST).json({
-            message: err.message,
+                message: err.message,
             });
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Patch('/member/:id')
     async deactivateMember(@Res() res, @Param('id') id) {
         try {
@@ -37,7 +40,7 @@ export class AdminController {
         } catch (err) {
             Logger.error(err);
             return res.status(HttpStatus.BAD_REQUEST).json({
-            message: err.message,
+                message: err.message,
             });
         }
     }

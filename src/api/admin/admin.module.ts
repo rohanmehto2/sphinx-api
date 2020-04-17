@@ -8,4 +8,4 @@ import { MemberModule } from 'src/repositories/member/member.module';
   controllers: [AdminController],
   providers: [AdminService]
 })
-export class AdminModule {}
+export class AdminModule { }

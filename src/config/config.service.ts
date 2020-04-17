@@ -26,6 +26,12 @@ export class ConfigService {
       DATABASE_PASSWORD: Joi.string().required(),
       ADMIN_PASSWORD: Joi.string().required(),
       ALLOWED_EMAIL_DOMAINS: Joi.string().required(),
+      ACCESS_TOKEN_SECRET_KEY: Joi.string().required(),
+      REFRESH_TOKEN_SECRET_KEY: Joi.string().required(),
+      ACCESS_TOKEN_TIMEOUT: Joi.string().required(),
+      REFRESH_TOKEN_TIMEOUT: Joi.string().required(),
+      ACCESS_TOKEN_PUBLIC_KEY: Joi.string().required(),
+      ACCESS_TOKEN_PRIVATE_KEY: Joi.string().required(),
     });
 
     const { error, value: validatedEnvConfig } = Joi.validate(

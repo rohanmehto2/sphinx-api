@@ -5,13 +5,13 @@ import { MemberService } from 'src/repositories/member/member.service';
 export class AdminService {
     constructor(
         private readonly memberService: MemberService
-    ) {}
+    ) { }
 
     async createMember(member) {
         return await this.memberService.save(member);
     }
 
     async deactivateMember(id) {
-        return await this.memberService.update(id, {active: false});
+        return await this.memberService.update(id, { active: false });
     }
 }

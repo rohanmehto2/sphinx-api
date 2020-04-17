@@ -10,7 +10,7 @@ export class Secret {
   @Column()
   secretName: string;
 
-  @Column()
+  @Column({ type: "longtext" })
   secret: string;
 
   @Column({ default: '' })
@@ -21,10 +21,14 @@ export class Secret {
 
   @Column({ type: 'timestamp', nullable: true })
   read: Date;
+  //Creator email
+
+  @Column()
+  creatorEmail: string;
 
   @ManyToOne(type => Member, member => member.sentSecrets)
   @JoinColumn()
-  sender: Member;
+  creator: Member;
 
   @ManyToOne(type => Member, member => member.receivedSecrets)
   @JoinColumn()

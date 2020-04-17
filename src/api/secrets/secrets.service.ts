@@ -5,7 +5,7 @@ import { SecretService } from '../../repositories/secret/secret.service'
 export class SecretsService {
     constructor(
         private readonly secretService: SecretService
-    ) {}
+    ) { }
 
     async createSecret(secret) {
         return await this.secretService.save(secret);

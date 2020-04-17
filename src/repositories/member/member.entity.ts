@@ -1,29 +1,38 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, OneToOne, JoinColumn, ManyToOne, JoinTable, ManyToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, OneToOne, JoinColumn, ManyToOne, JoinTable, ManyToMany, BeforeInsert } from 'typeorm';
 // import { Status } from '../status/status.entity';
 import { Secret } from '../secret/secret.entity';
+import * as bcrypt from 'bcrypt';
 
 @Entity()
 export class Member {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: "longtext" })
   publicKey: string;
 
   @Column()
   name: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
-  @Column({default: false})
+  @Column({ default: false })
   active: boolean;
 
-//   @ManyToOne(type => Status)
-//   @JoinColumn()
-//   status: Status;
+  @Column()
+  password: string;
 
-  @OneToMany(type => Secret, secret => secret.sender)
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
+
+  //   @ManyToOne(type => Status)
+  //   @JoinColumn()
+  //   status: Status;
+
+  @OneToMany(type => Secret, secret => secret.creator)
   @JoinColumn()
   sentSecrets: Secret[];
 
@@ -37,7 +46,7 @@ export class Member {
   @UpdateDateColumn({ type: 'timestamp' })
   modifiedAt: Date;
 
-  @Column({default: 'admin'})
+  @Column({ default: 'admin' })
   createdBy: string;
 
   @Column({ nullable: true })

@@ -12,4 +12,4 @@ import { ConfigModule } from 'src/config/config.module';
   providers: [SecretService],
   exports: [SecretService],
 })
-export class SecretModule {}
+export class SecretModule { }
