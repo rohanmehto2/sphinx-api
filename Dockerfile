@@ -19,5 +19,6 @@ WORKDIR /usr/local/nub-api
 COPY --from=node_modules /tmp/node_modules ./node_modules
 COPY --from=dist /tmp/dist ./dist
 COPY --from=environments /tmp/environments ./environments
+# Set environment for docker image
 ENV NODE_ENV=environments/development
 CMD ["node", "dist/main.js"]

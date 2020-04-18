@@ -32,7 +32,6 @@ export class MembersController {
     async getMemberByEmail(@Res() res, @Param('email') email) {
         try {
             const member = await this.membersService.getMemberByEmail(email);
-            Logger.log(member)
             if (!member) {
                 return res.status(HttpStatus.NOT_FOUND).json({
                     message: 'Member not found',

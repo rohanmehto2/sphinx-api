@@ -20,7 +20,6 @@ export class LoginController {
   @Post('login')
   async login(@Request() req, @Res() res) {
     try {
-      Logger.log(req.user)
       const loginResults = await this.authService.login(req.user);
       if (!loginResults) {
         throw new UnauthorizedException(
@@ -113,7 +112,6 @@ export class LoginController {
     try {
       let ignoreExpiration = false
       const val = await verify(token, this.configService.get('ACCESSKEYSECRETTOKEN'), { ignoreExpiration });
-      Logger.log(val);
       if (val) {
         return res.status(HttpStatus.OK).json({
           message: 'Token is valid'
