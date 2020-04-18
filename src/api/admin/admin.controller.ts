@@ -8,13 +8,11 @@ export class AdminController {
     constructor(
         private readonly adminService: AdminService
     ) { }
-    
+
     @Post('/member')
     async addMember(@Res() res, @Body() body) {
         try {
-            Logger.log(body)
             const member = await this.adminService.createMember(body);
-
             return res.status(HttpStatus.OK).json({
                 message: 'Member created successfully',
                 member,

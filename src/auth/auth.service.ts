@@ -46,7 +46,7 @@ export class AuthService {
     try {
       await this.tokensService.deleteRefreshToken(refreshToken);
     } catch (error) {
-      Logger.log(error.message);
+      Logger.error(error.message);
       throw new Error('Error while logging out')
     }
   }

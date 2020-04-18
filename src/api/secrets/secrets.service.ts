@@ -27,8 +27,9 @@ export class SecretsService {
 
     @Cron('0 */30 * * * *')
     handleCron() {
+        Logger.warn('Secret Cleanup Initiated....');
         this.secretHandler();
-        Logger.log('Deleting secrets every 30 minutes');
+        Logger.warn('Secret Cleanup Completed');
     }
 
     async secretHandler() {
@@ -40,7 +41,7 @@ export class SecretsService {
                 if (timeLeft <= 0) {
                     await this.deleteSecret(secret.id);
                 }
-            }         
+            }
         } catch (error) {
             Logger.error(error.message);
         }
