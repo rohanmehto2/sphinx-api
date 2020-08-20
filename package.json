@@ -29,7 +29,7 @@
     "@nestjs/schedule": "^0.3.0",
     "@nestjs/typeorm": "^7.0.0",
     "@types/jsonwebtoken": "^8.3.9",
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "dotenv": "^8.2.0",
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
